@@ -3,10 +3,10 @@
 ## Genel Prensipler
 
 - **RESTful** tasarım — kaynak odaklı URL yapısı
-- **Clean Architecture** — CQRS pattern (Command/Query ayrımı) MediatR ile
+- **Clean Architecture** — CQRS pattern (Command/Query ayrımı) Wolverine ile
 - **Versiyonlama:** URL bazlı (`/api/v1/...`)
 - **Response format:** JSON, tutarlı envelope pattern
-- **Dokümantasyon:** Swagger/OpenAPI auto-generated
+- **Dokümantasyon:** Scalar + Microsoft.AspNetCore.OpenApi
 - **Auth:** Bearer JWT token (Keycloak)
 
 ## Standart Response Envelope
@@ -139,18 +139,20 @@ GET    /api/v1/admin/users                # Kullanıcı listesi
 GET    /api/v1/admin/dashboard            # İstatistikler
 ```
 
-## CQRS Pattern (MediatR)
+## CQRS Pattern (Wolverine)
 
 ### Command Örneği
 ```csharp
 // Command
-public record CreateOrderCommand(Guid SessionId, List<OrderItemDto> Items, string? Note) 
-    : IRequest<OrderResponse>;
+public record CreateOrderCommand(Guid SessionId, List<OrderItemDto> Items, string? Note);
 
 // Handler
-public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, OrderResponse>
+public static class CreateOrderHandler
 {
-    public async Task<OrderResponse> Handle(CreateOrderCommand request, CancellationToken ct)
+    public static async Task<OrderResponse> HandleAsync(
+        CreateOrderCommand command,
+        IDocumentSession session,
+        CancellationToken ct)
     {
         // 1. Validasyon (FluentValidation pipeline)
         // 2. Domain logic
@@ -163,7 +165,18 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, OrderRespo
 
 ### Query Örneği
 ```csharp
-public record GetSessionBillQuery(Guid SessionId) : IRequest<BillResponse>;
+public record GetSessionBillQuery(Guid SessionId);
+
+public static class GetSessionBillHandler
+{
+    public static async Task<BillResponse> HandleAsync(
+        GetSessionBillQuery query,
+        IQuerySession session,
+        CancellationToken ct)
+    {
+        // Query logic
+    }
+}
 ```
 
 ## Pagination

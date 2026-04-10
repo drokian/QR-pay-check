@@ -172,7 +172,7 @@ Versiyonu yazılmayan bileşenlerin stabil olan latest versiyonunu kullan
 
 ```
 PROJECT_NAME: QR-pay-check
-STACK: .NET Core 10 + React/Vite + React Native + PostgreSQL + Keycloak + iyzico + SignalR + Turborepo
+STACK: .NET 10 + React/Vite + React Native + PostgreSQL + Keycloak + iyzico + SignalR + Turborepo
 PATTERN: Clean Architecture (Wolverine CQRS, FluentValidation, Mapster)
 REPO: https://github.com/drokian/QR-pay-check
 DEFAULT_BRANCH: develop
@@ -272,7 +272,7 @@ cd apps/api
 dotnet restore
 dotnet ef database update --project src/QRPayCheck.Infrastructure
 dotnet run --project src/QRPayCheck.API
-# → http://localhost:5000 | Swagger: http://localhost:5000/swagger
+# → http://localhost:5000 | API Docs: http://localhost:5000/scalar
 
 # Frontend (kök dizinden)
 npm install
@@ -293,6 +293,7 @@ apps/customer-web       → React + Vite (müşteri)
 apps/restaurant-web     → React + Vite (restoran yönetim)
 apps/customer-mobile    → React Native (müşteri)
 apps/restaurant-mobile  → React Native (restoran)
+apps/admin-web          → React + Vite (platform admin)
 packages/ui             → Paylaşılan UI bileşenleri
 packages/api-client     → OpenAPI'den auto-generate edilen client
 packages/shared-types   → Ortak TypeScript tipleri

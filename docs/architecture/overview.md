@@ -15,7 +15,7 @@
                              │
                     ┌────────▼────────┐
                     │   API Gateway   │
-                    │  (.NET Core)    │
+                    │   (.NET 10)     │
                     └────────┬────────┘
                              │
           ┌──────────────────┼──────────────────┐
@@ -31,13 +31,13 @@
                     └─────────────────┘
 ```
 
-## Katmanlı Mimari (.NET Core — Clean Architecture)
+## Katmanlı Mimari (.NET 10 — Clean Architecture)
 
 ```
 ┌─────────────────────────────────┐
 │         QRPayCheck.API          │  ← Controllers, Middleware, Filters
 ├─────────────────────────────────┤
-│     QRPayCheck.Application      │  ← Use Cases, CQRS (MediatR), DTOs
+│     QRPayCheck.Application      │  ← Use Cases, CQRS (Wolverine), DTOs
 ├─────────────────────────────────┤
 │       QRPayCheck.Domain         │  ← Entities, Value Objects, Events
 ├─────────────────────────────────┤

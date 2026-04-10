@@ -4,7 +4,7 @@
 
 | Araç | Versiyon | Açıklama |
 |------|----------|----------|
-| .NET SDK | 8.0+ | Backend API |
+| .NET SDK | 10.0+ | Backend API |
 | Node.js | 20 LTS+ | Frontend build & tooling |
 | Docker Desktop | latest | PostgreSQL, Keycloak, API container |
 | Git | latest | Versiyon kontrol |
@@ -36,7 +36,7 @@ dotnet ef database update --project src/QRPayCheck.Infrastructure
 dotnet run --project src/QRPayCheck.API
 ```
 API: `http://localhost:5000`
-Swagger: `http://localhost:5000/swagger`
+API Docs: `http://localhost:5000/scalar`
 
 ### 4. Frontend Başlatma
 ```bash
@@ -97,7 +97,7 @@ docs(architecture): veritabanı tasarımı eklendi
 
 ### .NET API
 - **Controller:** Sadece request/response mapping, iş mantığı yok
-- **Application:** MediatR handler'lar, FluentValidation, AutoMapper profilleri
+- **Application:** Wolverine handler'lar, FluentValidation, Mapster profilleri
 - **Domain:** Entity, Value Object — framework bağımlılığı yok
 - **Infrastructure:** DB, external service integration
 

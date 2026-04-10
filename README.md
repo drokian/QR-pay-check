@@ -10,7 +10,7 @@ Müşteriler masadaki QR kodu okutarak menüyü görüntüler, sipariş verir ve
 
 | Katman | Teknoloji |
 |--------|-----------|
-| Backend | .NET Core 8, Clean Architecture, MediatR |
+| Backend | .NET 10, Clean Architecture, Wolverine |
 | Veritabanı | PostgreSQL + EF Core |
 | Auth | Keycloak (OAuth2/OIDC) |
 | Ödeme | iyzico |
@@ -24,7 +24,7 @@ Müşteriler masadaki QR kodu okutarak menüyü görüntüler, sipariş verir ve
 
 ```
 apps/
-  api/               # .NET Core Web API
+  api/               # .NET 10 Web API
   customer-web/       # Müşteri web uygulaması
   customer-mobile/    # Müşteri mobil uygulaması
   restaurant-web/     # Restoran yönetim web

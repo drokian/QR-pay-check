@@ -111,15 +111,15 @@ Her geliştirme bölümünde bu adımları sırayla uygula, atlama:
 
 ```
 PROJECT: QR Pay Check
-STACK: .NET Core + React/Vite + React Native + PostgreSQL + Keycloak + iyzico + SignalR + Turborepo
-PATTERN: Clean Architecture (CQRS, FluentValidation, Mapster)
+STACK: .NET 10 + React/Vite + React Native + PostgreSQL + Keycloak + iyzico + SignalR + Turborepo
+PATTERN: Clean Architecture (Wolverine CQRS, FluentValidation, Mapster)
 REPO: https://github.com/drokian/QR-pay-check
 DEFAULT_BRANCH: develop
 ```
 
 ### Dizin Yapısı
 ```
-apps/api               → .NET Core Web API (Clean Architecture)
+apps/api               → .NET 10 Web API (Clean Architecture)
 apps/customer-web      → React + Vite (müşteri)
 apps/restaurant-web    → React + Vite (restoran yönetim)
 apps/customer-mobile   → React Native (müşteri)

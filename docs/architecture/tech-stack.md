@@ -4,7 +4,7 @@
 
 | Katman | Teknoloji | Versiyon | Gerekçe |
 |--------|-----------|----------|---------|
-| Backend API | .NET Core | 10.0 (LTS) | Performans, tip güvenliği, Clean Architecture uyumu |
+| Backend API | .NET | 10.0 (LTS) | Performans, tip güvenliği, Clean Architecture uyumu |
 | Veritabanı | PostgreSQL | 18+ | Açık kaynak, JSON desteği, row-level security |
 | ORM | Entity Framework Core | 10.0.x | .NET ekosistemi ile doğal uyum, migration desteği |
 | Auth | Keycloak | 26+ | Self-hosted OAuth2/OIDC, SMS flow desteği, rol yönetimi |
@@ -18,7 +18,7 @@
 
 ## Backend — .NET 10
 
-### Neden .NET Core?
+### Neden .NET?
 - **Performans:** TechEmpower benchmark'larında en hızlı framework'lerden biri
 - **Tip güvenliği:** Compile-time hata yakalama, refactoring kolaylığı
 - **Clean Architecture:** Katmanlı mimari için ideal ekosistem (Wolverine, FluentValidation)
@@ -95,7 +95,7 @@ AutoMapper, 2025'te ticari lisansa geçti (RPL-1.5). Mapster açık kaynak ve da
 ## Realtime — SignalR
 
 ### Neden SignalR?
-- .NET Core ile native entegrasyon
+- .NET ile native entegrasyon
 - WebSocket → Server-Sent Events → Long Polling otomatik fallback
 - Hub pattern ile kolay grup yönetimi (masalara özel bildirim)
 - Scale-out: Redis backplane ile horizontal scaling
@@ -130,7 +130,7 @@ AutoMapper, 2025'te ticari lisansa geçti (RPL-1.5). Mapster açık kaynak ve da
 
 | Servis | Port | Açıklama |
 |--------|------|----------|
-| `api` | 5000 | .NET Core Web API |
+| `api` | 5000 | .NET 10 Web API |
 | `db` | 5432 | PostgreSQL |
 | `keycloak` | 8080 | Keycloak Auth Server |
 | `nginx` | 80/443 | Reverse proxy + static files |

@@ -16,7 +16,7 @@
 | Container | Docker + Compose | — | Geliştirme ve prod ortam tutarlılığı |
 | Reverse Proxy | Nginx | — | Performans, SSL termination, static serving |
 
-## Backend — .NET Core 10
+## Backend — .NET 10
 
 ### Neden .NET Core?
 - **Performans:** TechEmpower benchmark'larında en hızlı framework'lerden biri

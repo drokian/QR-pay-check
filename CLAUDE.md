@@ -17,7 +17,7 @@ Rolün **karar vermek değil, uygulamak**.
 
 - Mimari kararlar → Opus'a yönlendir
 - Sprint planlaması → Sonnet'e yönlendir
-- Uygulama görevleri → Haiku yapsın
+- Uygulama görevleri → Claude Code yapsın
 
 ---
 
@@ -207,7 +207,7 @@ Her zaman Conventional Commits kullan. Mesajsız commit yapma.
 
 ---
 
-## BÖLÜM 8: YÜKSELTİM YOLLARI
+## BÖLÜM 8: YÜKSELTME YOLLARI
 
 | Durum | Eylem |
 |-------|-------|
@@ -252,7 +252,7 @@ Tüm merge'ler Pull Request üzerinden yapılır.
    - Test plan adımlarını checkbox listesi olarak ekle
    - `--base develop` kullan
 6. **Bilgilendir:** PR erişim linkini kullanıcıya ver.
-7. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap, açıklayıcı commit mesajıyla commitle ve push'la.
+7. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap, açıklayıcı commit mesajıyla commitle; **push için kullanıcıdan izin iste**, izin gelince push'la.
 8. **Tekrar review:** Ek review gelebilir — 7. adımı tekrarla.
 9. **Merge sonrası:** Kullanıcıdan "merge edildi" bilgisi geldiğinde, sonraki bölüme geçmek için izin iste.
 10. **Döngü:** İzin gelince 1. adımdan tekrar başla.
@@ -288,7 +288,7 @@ npx turbo test       # Tüm frontend testleri
 
 ### Mimari Dizin Yapısı
 ```
-apps/api                → .NET Core 8 — Clean Architecture (5 katman)
+apps/api                → .NET 10 — Clean Architecture (5 katman)
 apps/customer-web       → React + Vite (müşteri)
 apps/restaurant-web     → React + Vite (restoran yönetim)
 apps/customer-mobile    → React Native (müşteri)

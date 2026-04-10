@@ -68,7 +68,7 @@ Her geliştirme bölümünde bu adımları sırayla uygula, atlama:
 4. Bölüm bitince **push için kullanıcıdan izin iste**, izin gelince push'la
 5. **PR için kullanıcıdan izin iste**, izin gelince: Türkçe detaylı açıklama + test checklist + `--base develop` ile PR oluştur
 6. PR linkini kullanıcıya ver
-7. Review gelince gerekli düzeltmeleri yap, commitle ve push'la
+7. Review gelince gerekli düzeltmeleri yap, commitle; **push için kullanıcıdan izin iste**, izin gelince push'la
 8. Ek review gelebilir — 7. adımı tekrarla
 9. "Merge edildi" bilgisi gelince sonraki bölüme geçmek için izin iste
 10. İzin gelince 1. adımdan başla

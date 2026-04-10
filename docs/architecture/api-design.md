@@ -151,7 +151,7 @@ public static class CreateOrderHandler
 {
     public static async Task<OrderResponse> HandleAsync(
         CreateOrderCommand command,
-        IDocumentSession session,
+        AppDbContext dbContext,
         CancellationToken ct)
     {
         // 1. Validasyon (FluentValidation pipeline)
@@ -171,7 +171,7 @@ public static class GetSessionBillHandler
 {
     public static async Task<BillResponse> HandleAsync(
         GetSessionBillQuery query,
-        IQuerySession session,
+        AppDbContext dbContext,
         CancellationToken ct)
     {
         // Query logic

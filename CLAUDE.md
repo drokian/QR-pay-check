@@ -248,7 +248,7 @@ Her zaman Conventional Commits kullan. Mesajsız commit yapma.
 - `develop` — **default base for ALL PRs**; every feature/fix/refactor branch merges here
 - When creating a PR with `gh pr create`, always use `--base develop`
 
-All branches must follow the naming conventions and workflow defined in `development/branching-strategy.md`.
+All branches must follow the naming conventions and workflow defined in `development/info/branching-strategy.md`.
 
 **Key rules:**
 - `main` — production only; never develop directly on this branch

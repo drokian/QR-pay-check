@@ -153,9 +153,9 @@ Aşağıdaki işlemler önceden onaylanmıştır ve onay gerektirmez:
 ✅ Writing or modifying unit/integration tests  
 ✅ Running `dotnet build`, `dotnet test`, `npm install`, `npm run build`  
 ✅ Running `git add` and `git commit` on the active feature branch  
-✅ Running `git push origin feat/[sprint-name]`  
+✅ Running `git push origin feature/[sprint-name]`  
 ✅ Adding new (non-breaking) database migrations  
-✅ Reading any file in the project  
+✅ Reading any file in the project (`.env`, secret ve credential dosyaları hariç — bkz. Section 2.2)  
 ✅ Running linters or formatters  
 ✅ Updating `Haiku-Implementation-Log.md`
 
@@ -245,16 +245,16 @@ Her zaman Conventional Commits kullan. Mesajsız commit yapma.
 > **These rules are absolute and must never be bypassed.**
 
 - `main` — production only; PRs to `main` are FORBIDDEN except from `release/*` or `hotfix/*` branches
-- `develop` — **default base for ALL PRs**; every feature/fix/refactor branch merges here
+- `develop` — **default base for ALL PRs**; every feature/bugfix/refactor branch merges here
 - When creating a PR with `gh pr create`, always use `--base develop`
 
-All branches must follow the naming conventions and workflow defined in `development/info/branching-strategy.md`.
+All branches must follow the naming conventions and workflow defined in this section.
 
 **Key rules:**
 - `main` — production only; never develop directly on this branch
-- `develop` — default integration branch; all feature/fix/docs/refactor branches merge here
-- Feature branches: `feat/<scope>-<short-desc>`
-- Fix branches: `fix/<scope>-<issue-id>`
+- `develop` — default integration branch; all feature/bugfix/docs/refactor branches merge here
+- Feature branches: `feature/<scope>-<short-desc>`
+- Bugfix branches: `bugfix/<scope>-<issue-id>`
 - Docs branches: `docs/<area>-<short-desc>`
 - Milestone branches: `milestone/mX-<desc>` (epic-level work)
 - Snapshot branches: `snapshot/<date>-<desc>` (freeze points, reference only — never merged)

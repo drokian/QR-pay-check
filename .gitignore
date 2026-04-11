@@ -21,8 +21,8 @@ out/
 !.env.example
 
 # .NET
-apps/api/src/**/bin/
-apps/api/src/**/obj/
+apps/api/**/bin/
+apps/api/**/obj/
 apps/api/**/*.user
 apps/api/**/*.suo
 apps/api/.vs/

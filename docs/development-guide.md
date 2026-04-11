@@ -25,8 +25,8 @@ docker-compose -f docker-compose.dev.yml up -d
 ```
 
 Bu komut şunları ayağa kaldırır:
-- PostgreSQL (port 5432)
-- Keycloak (port 8080)
+- PostgreSQL (port 5434)
+- Keycloak (port 8084)
 
 ### 3. API Başlatma
 ```bash

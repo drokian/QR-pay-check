@@ -1100,6 +1100,7 @@
       "QRPayCheck.Infrastructure/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "10.0.5",
+          "Microsoft.EntityFrameworkCore.Relational": "10.0.5",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
           "QRPayCheck.Application": "1.0.0",
           "QRPayCheck.Domain": "1.0.0",

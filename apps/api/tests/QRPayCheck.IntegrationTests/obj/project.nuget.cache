@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YOTR/1gxJ9M=",
+  "dgSpecHash": "6e3t7bdTjLo=",
   "success": true,
   "projectFilePath": "D:\\source\\drokian\\QR-pay-check\\apps\\api\\tests\\QRPayCheck.IntegrationTests\\QRPayCheck.IntegrationTests.csproj",
   "expectedPackageFiles": [
@@ -34,11 +34,11 @@
     "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.entityframeworkcore\\10.0.5\\microsoft.entityframeworkcore.10.0.5.nupkg.sha512",
     "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\10.0.5\\microsoft.entityframeworkcore.abstractions.10.0.5.nupkg.sha512",
     "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\10.0.5\\microsoft.entityframeworkcore.analyzers.10.0.5.nupkg.sha512",
-    "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\10.0.4\\microsoft.entityframeworkcore.relational.10.0.4.nupkg.sha512",
+    "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\10.0.5\\microsoft.entityframeworkcore.relational.10.0.5.nupkg.sha512",
     "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\10.0.5\\microsoft.extensions.caching.abstractions.10.0.5.nupkg.sha512",
     "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.extensions.caching.memory\\10.0.5\\microsoft.extensions.caching.memory.10.0.5.nupkg.sha512",
     "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.0\\microsoft.extensions.configuration.10.0.0.nupkg.sha512",
-    "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.4\\microsoft.extensions.configuration.abstractions.10.0.4.nupkg.sha512",
+    "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.5\\microsoft.extensions.configuration.abstractions.10.0.5.nupkg.sha512",
     "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.extensions.configuration.binder\\10.0.0\\microsoft.extensions.configuration.binder.10.0.0.nupkg.sha512",
     "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.extensions.configuration.commandline\\10.0.0\\microsoft.extensions.configuration.commandline.10.0.0.nupkg.sha512",
     "C:\\Users\\dgsiv\\.nuget\\packages\\microsoft.extensions.configuration.environmentvariables\\10.0.0\\microsoft.extensions.configuration.environmentvariables.10.0.0.nupkg.sha512",

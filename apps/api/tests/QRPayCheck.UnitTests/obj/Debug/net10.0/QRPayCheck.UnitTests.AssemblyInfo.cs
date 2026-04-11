@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QRPayCheck.UnitTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f8622a2e960a27eaee62fbb046c0a002b07f24b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b9ff744fd6000f9520435282b5c7911edd01c197")]
 [assembly: System.Reflection.AssemblyProductAttribute("QRPayCheck.UnitTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QRPayCheck.UnitTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

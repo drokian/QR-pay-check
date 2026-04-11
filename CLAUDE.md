@@ -342,7 +342,8 @@ docs/                   → Proje dokümantasyonu
 - NuGet, npm veya diğer paket yöneticilerinde major veya minor versiyon yükseltmesi kullanıcı onayı gerektirir. Patch güncellemeler için de onay alınması önerilir.
 - Versiyon yükseltmesi gerektiğinde şu formatta kullanıcıya sor:
   > "`X` şu an `A.B.C` versiyonunda. `A.B.D` versiyonuna yükseltmek istiyorum. Onaylıyor musunuz?"
-- Onay gelmeden hiçbir `dotnet add package`, `npm install`, `dotnet tool update` veya benzeri komut çalıştırılmaz.
+- Onay gelmeden paket veya versiyon değişikliği yapan hiçbir komut çalıştırılmaz; buna `dotnet add package`, `npm install <paket>`, `npm update`, `dotnet tool update` ve benzeri komutlar dahildir.
+- Mevcut bağımlılık tanımına sadık kalan, yeni paket eklemeyen ve versiyon değiştirmeyen kurulum/doğrulama komutları bu yasağın dışındadır.
 
 ### Port Yönetimi
 - Port-sensitive işlemlerde önce portun müsait olup olmadığını kontrol et:

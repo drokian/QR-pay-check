@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using QRPayCheck.Application.Common.Interfaces;
 using QRPayCheck.Infrastructure.Persistence;
+using QRPayCheck.Infrastructure.Services;
 using Scalar.AspNetCore;
 using Serilog;
 using Wolverine;
@@ -15,6 +17,9 @@ builder.Host.UseSerilog((ctx, lc) => lc
 
 // OpenAPI
 builder.Services.AddOpenApi();
+
+// HttpContext erişimi (TenantContext, CurrentUserContext için)
+builder.Services.AddHttpContextAccessor();
 
 // Authentication (Keycloak JWT) — fail-fast doğrulama
 var keycloakAuthority = builder.Configuration["Keycloak:Authority"];
@@ -50,9 +55,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
+// Multi-tenancy + kullanıcı bağlamı
+builder.Services.AddScoped<ITenantContext, TenantContext>();
+builder.Services.AddScoped<ICurrentUserContext, CurrentUserContext>();
+
+// Dosya yükleme (local storage)
+builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
+
 // EF Core + PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<AppDbContext>());
 
 // Wolverine CQRS
 builder.Host.UseWolverine(opts =>
@@ -68,6 +81,9 @@ var app = builder.Build();
 app.UseSerilogRequestLogging();
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Statik dosyalar (görsel yükleme için)
+app.UseStaticFiles();
 
 // OpenAPI + Scalar (yalnızca geliştirme ortamı)
 if (app.Environment.IsDevelopment())

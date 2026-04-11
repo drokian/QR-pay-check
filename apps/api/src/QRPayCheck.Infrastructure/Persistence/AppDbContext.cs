@@ -29,22 +29,23 @@ public class AppDbContext : DbContext, IApplicationDbContext
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
 
         // Multi-tenancy Global Query Filter
-        // TenantId null ise (platform-admin veya Tenant oluşturma aşaması) filtre devre dışı
+        // TenantId null ise (JWT'de tenant_id claim'i yok) HİÇBİR kayıt dönmez.
+        // Platform-admin gibi senaryolarda filtreden kaçmak için IgnoreQueryFilters() açıkça kullanılmalı.
         modelBuilder.Entity<Branch>()
-            .HasQueryFilter(b => _tenantContext.TenantId == null || b.TenantId == _tenantContext.TenantId);
+            .HasQueryFilter(b => _tenantContext.TenantId != null && b.TenantId == _tenantContext.TenantId);
 
         modelBuilder.Entity<Menu>()
-            .HasQueryFilter(m => _tenantContext.TenantId == null || m.TenantId == _tenantContext.TenantId);
+            .HasQueryFilter(m => _tenantContext.TenantId != null && m.TenantId == _tenantContext.TenantId);
 
         modelBuilder.Entity<Category>()
-            .HasQueryFilter(c => _tenantContext.TenantId == null || c.TenantId == _tenantContext.TenantId);
+            .HasQueryFilter(c => _tenantContext.TenantId != null && c.TenantId == _tenantContext.TenantId);
 
         modelBuilder.Entity<MenuItem>()
-            .HasQueryFilter(m => _tenantContext.TenantId == null || m.TenantId == _tenantContext.TenantId);
+            .HasQueryFilter(m => _tenantContext.TenantId != null && m.TenantId == _tenantContext.TenantId);
 
         // MenuItemOption'ın MenuItem ile ilişkisi zorunlu (required FK) ve MenuItem filtrelidir.
         // EF Core uyarısını gidermek için MenuItemOption da MenuItem'ın tenant filtresiyle hizalanır.
         modelBuilder.Entity<MenuItemOption>()
-            .HasQueryFilter(o => _tenantContext.TenantId == null || o.MenuItem.TenantId == _tenantContext.TenantId);
+            .HasQueryFilter(o => _tenantContext.TenantId != null && o.MenuItem.TenantId == _tenantContext.TenantId);
     }
 }

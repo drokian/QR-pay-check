@@ -1,2 +1,37 @@
 # Development - dahili geliştirme dosyaları
 development/
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Turbo
+.turbo/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# .NET
+apps/api/**/bin/
+apps/api/**/obj/
+apps/api/**/*.user
+apps/api/**/*.suo
+apps/api/.vs/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

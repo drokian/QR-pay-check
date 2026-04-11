@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/QRPayCheck.API/QRPayCheck.API.csproj" />
+    <Project Path="src/QRPayCheck.Application/QRPayCheck.Application.csproj" />
+    <Project Path="src/QRPayCheck.Domain/QRPayCheck.Domain.csproj" />
+    <Project Path="src/QRPayCheck.Infrastructure/QRPayCheck.Infrastructure.csproj" />
+    <Project Path="src/QRPayCheck.Shared/QRPayCheck.Shared.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/QRPayCheck.IntegrationTests/QRPayCheck.IntegrationTests.csproj" />
+    <Project Path="tests/QRPayCheck.UnitTests/QRPayCheck.UnitTests.csproj" />
+  </Folder>
+</Solution>

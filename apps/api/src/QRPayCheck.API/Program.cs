@@ -26,7 +26,8 @@ if (string.IsNullOrWhiteSpace(keycloakAuthority) ||
 {
     throw new InvalidOperationException(
         "Keycloak JWT yapılandırması geçersiz: 'Keycloak:Authority' değeri boş veya placeholder. " +
-        "Lütfen geçerli bir Authority değeri sağlayın (örn. environment variable veya user-secrets üzerinden).");
+        "Local geliştirme için appsettings.Development.json dosyasında geçerli bir değer bulunmalıdır; " +
+        "diğer ortamlar için environment variable veya user-secrets kullanın.");
 }
 
 if (string.IsNullOrWhiteSpace(keycloakAudience) ||
@@ -35,7 +36,8 @@ if (string.IsNullOrWhiteSpace(keycloakAudience) ||
 {
     throw new InvalidOperationException(
         "Keycloak JWT yapılandırması geçersiz: 'Keycloak:Audience' değeri boş veya placeholder. " +
-        "Lütfen geçerli bir Audience değeri sağlayın (örn. environment variable veya user-secrets üzerinden).");
+        "Local geliştirme için appsettings.Development.json dosyasında geçerli bir değer bulunmalıdır; " +
+        "diğer ortamlar için environment variable veya user-secrets kullanın.");
 }
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

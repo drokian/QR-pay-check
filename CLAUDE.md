@@ -252,7 +252,7 @@ Tüm merge'ler Pull Request üzerinden yapılır.
    - Test plan adımlarını checkbox listesi olarak ekle
    - `--base develop` kullan
 6. **Bilgilendir:** PR erişim linkini kullanıcıya ver.
-7. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap, açıklayıcı commit mesajıyla commitle ve push'la.
+7. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap ve açıklayıcı commit mesajıyla commitle. Ardından push yapmak için kullanıcıdan açık onay iste; "push et", "push yapabilirsin" veya eşdeğer bir onay gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz. Onay gelince push'la.
 8. **Tekrar review:** Ek review gelebilir — 7. adımı tekrarla.
 9. **Merge sonrası:** ⛔ DUR. Kullanıcıdan "merge edildi" bilgisi VE "devam et" / "sonraki bölüme geç" onayı gelmeden bir sonraki bölüme KESİNLİKLE geçilmez. Bu onay gelmeden hiçbir yeni branch açılmaz, hiçbir kod yazılmaz.
 10. **Döngü:** İzin gelince 1. adımdan tekrar başla.

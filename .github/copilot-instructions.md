@@ -4,6 +4,17 @@ Bu dosya, QR Pay Check projesinde Copilot'un her zaman uyması gereken kurallar�
 
 ---
 
+## PROJE SAHİPLİĞİ
+
+- Bu proje kullanıcıya aittir. AI, projeyi kurmaya yardım etmiş olsa bile
+  tüm kararlar kullanıcıya aittir.
+- Kullanıcının doğrudan yaptığı değişiklikler, başka araçların (Copilot, 
+  GitHub web editörü vb.) yaptığı değişiklikler projenin doğal parçasıdır.
+- Beklenmedik commit veya değişiklik görüldüğünde kullanıcıya sor, 
+  kendi bilgine göre yorumlama.
+
+---
+
 ## ROL
 
 Rolün **karar vermek değil, uygulamak**. Mimari sorular için "Bu mimari bir karar" de, güvenlik sorunlarını anında raporla, belirsiz gereksinimlerde kod yazmadan önce açıklama iste. Her zaman Türkçe yanıt ver.
@@ -63,18 +74,19 @@ Bu işlem geri alınamaz olabilir. Devam etmemi onaylıyor musunuz?
 > **Bu adımlar her işlem bölümünde sırasıyla uygulanır. Atlanamaz.**
 
 1. **Başlangıç:** `develop` branch'ını `origin/develop` ile hizala (`git checkout develop && git pull origin develop`).
-2. **Branch oluştur:** `develop`'dan, Bölüm 9'daki branch stratejisine uygun isimle yeni branch aç.
-3. **Commit:** Birden fazla adım varsa her adımın sonunda yapılan işlemi açıklayıcı bir mesajla commitle (Bölüm 6 formatına uygun).
-4. **Push izni:** ⛔ DUR. Bölüm tamamlandığında push yapmak için kullanıcıdan açık onay bekle. "push et", "push yapabilirsin" veya eşdeğer bir onay gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz.
-5. **PR izni:** ⛔ DUR. PR oluşturmak için kullanıcıdan açık onay bekle. Onay gelmeden `gh pr create` komutu KESİNLİKLE çalıştırılmaz. İzin gelince:
+2. **Branch oluştur:** `develop`'dan, DAL İSİMLENDİRME bölümündeki stratejiye uygun isimle yeni branch aç.
+3. **Ortam kontrolü:** Port-sensitive komutlarda (`dotnet`, `npm`, `docker-compose` vb.) önce `cd <hedef_dizin>` çalıştır, sonra komutu çalıştır. Mevcut çalışma dizinine güvenme.
+4. **Commit:** Birden fazla adım varsa her adımın sonunda yapılan işlemi açıklayıcı bir mesajla commitle (COMMIT KURALI bölümündeki formata uygun).
+5. **Push izni:** ⛔ DUR. Bölüm tamamlandığında push yapmak için kullanıcıdan açık onay bekle. "push et", "push yapabilirsin" veya eşdeğer bir onay gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz.
+6. **PR izni:** ⛔ DUR. PR oluşturmak için kullanıcıdan açık onay bekle. Onay gelmeden `gh pr create` komutu KESİNLİKLE çalıştırılmaz. İzin gelince:
    - Türkçe, detaylı PR açıklaması yaz
    - Test plan adımlarını checkbox listesi olarak ekle
    - `--base develop` kullan
-6. **Bilgilendir:** PR erişim linkini kullanıcıya ver.
-7. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap, açıklayıcı commit mesajıyla commitle; ardından push için kullanıcıdan açık onay iste. 4. adımdaki kuralla aynı şekilde, açık izin gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz.
-8. **Tekrar review:** Ek review gelebilir — 7. adımı tekrarla.
-9. **Merge sonrası:** ⛔ DUR. Kullanıcıdan "merge edildi" bilgisi VE "devam et" / "sonraki bölüme geç" onayı gelmeden bir sonraki bölüme KESİNLİKLE geçilmez. Bu onay gelmeden hiçbir yeni branch açılmaz, hiçbir kod yazılmaz.
-10. **Döngü:** İzin gelince 1. adımdan tekrar başla.
+7. **Bilgilendir:** PR erişim linkini kullanıcıya ver.
+8. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap, açıklayıcı commit mesajıyla commitle; ardından push için kullanıcıdan açık onay iste. 5. adımdaki kuralla aynı şekilde, açık izin gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz.
+9. **Tekrar review:** Ek review gelebilir — 8. adımı tekrarla.
+10. **Merge sonrası:** ⛔ DUR. Kullanıcıdan "merge edildi" bilgisi VE "devam et" / "sonraki bölüme geç" onayı gelmeden bir sonraki bölüme KESİNLİKLE geçilmez. Bu onay gelmeden hiçbir yeni branch açılmaz, hiçbir kod yazılmaz.
+11. **Döngü:** İzin gelince 1. adımdan tekrar başla.
 
 ---
 
@@ -141,3 +153,34 @@ development/           → Dahili notlar (.gitignore'da)
 - **Auth:** Keycloak self-hosted. JWT'den `TenantId` çıkarılır.
 - **Ödeme:** iyzico 3D Secure zorunlu.
 - **Realtime:** SignalR, masa bazlı gruplara bildirim gönderir.
+
+---
+
+
+## KULLANICI DEĞİŞİKLİKLERİ VE BAĞIMLILIK YÖNETİMİ
+
+> **Bu kurallar mutlak olup atlanamaz.**
+
+### Kullanıcı Değişiklikleri
+- Kullanıcının doğrudan yaptığı değişiklikler **kesinlikle silinemez, ezilemez veya geri alınamaz.**
+- `.gitignore`, config dosyaları dahil her dosyada kullanıcı değişikliği korunur.
+- Bir dosyayı düzenlemeden önce kullanıcının o dosyada değişiklik yapıp yapmadığını kontrol et.
+- git log'da beklenmedik commitler görürsen kendi yorumuna göre hareket etme — kullanıcıya sor.
+
+### Versiyon & Bağımlılık Yönetimi
+- SDK, runtime veya framework versiyonu (`.NET`, `Node.js`, `npm` vb.) **kullanıcı onayı olmadan değiştirilemez.**
+- NuGet, npm veya diğer paket yöneticilerinde major veya minor versiyon yükseltmesi kullanıcı onayı gerektirir. Patch güncellemeler için de onay alınması önerilir.
+- Versiyon yükseltmesi gerektiğinde şu formatta kullanıcıya sor:
+  > "`X` şu an `A.B.C` versiyonunda. `A.B.D` versiyonuna yükseltmek istiyorum. Onaylıyor musunuz?"
+- Onay gelmeden hiçbir `dotnet add package`, `npm install`, `dotnet tool update` veya benzeri komut çalıştırılmaz.
+
+### Port Yönetimi
+- Port-sensitive işlemlerde önce portun müsait olup olmadığını kontrol et:
+  - WSL2: `ss -tlnp | grep :<port>`
+  - Windows: `netstat -ano | findstr :<port>`
+- Mevcut port durumunu kontrol etmeden yeni port ataması yapma.
+
+--- 
+
+
+

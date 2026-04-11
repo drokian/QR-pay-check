@@ -104,6 +104,7 @@ Devam etmemi onaylıyor musunuz? (Evet/Hayır)
 | `develop`'a direkt commit | Dur ve sor |
 | Paylaşılan branch'lerde PR olmadan merge | Dur ve sor |
 | Herhangi bir branch'i silmek | Dur ve sor |
+| Kullanıcının yaptığı değişikliği geri almak veya ezmek | Dur ve sor |
 
 ---
 
@@ -119,6 +120,7 @@ Devam etmemi onaylıyor musunuz? (Evet/Hayır)
 | Mevcut görev dışında refactoring | Dur ve sor |
 | Sprint planında olmayan bağımlılık ekleme | Dur ve sor |
 | Tanımlı yapı dışında yeni dosya oluşturma | Dur ve sor |
+| Kullanıcının doğrudan yaptığı değişikliği silmek veya değiştirmek | Dur ve sor |
 
 **Yanıt şablonu:**
 ```
@@ -143,7 +145,6 @@ Aşağıdaki işlemler önceden onaylanmıştır ve onay gerektirmez:
 ✅ `dotnet build`, `dotnet test`, `npm install`, `npm run build` çalıştırma  
 ✅ `npx turbo dev`, `npx turbo test`, `npx turbo build` çalıştırma  
 ✅ Aktif feature branch'inde `git add` ve `git commit` çalıştırma  
-✅ `git push origin feature/[sprint-adı]` çalıştırma  
 ✅ Yeni (breaking olmayan) veritabanı migrasyonu ekleme  
 ✅ Projedeki herhangi bir dosyayı okuma (`.env`, secret ve credential dosyaları hariç — bkz. Bölüm 2.2)  
 ✅ Linter veya formatter çalıştırma  
@@ -254,17 +255,18 @@ Tüm merge'ler Pull Request üzerinden yapılır.
 
 1. **Başlangıç:** `develop` branch'ını `origin/develop` ile hizala (`git checkout develop && git pull origin develop`).
 2. **Branch oluştur:** `develop`'dan, Bölüm 9'daki branch stratejisine uygun isimle yeni branch aç.
-3. **Commit:** Birden fazla adım varsa her adımın sonunda yapılan işlemi açıklayıcı bir mesajla commitle (Bölüm 6 formatına uygun).
-4. **Push izni:** ⛔ DUR. Bölüm tamamlandığında push yapmak için kullanıcıdan açık onay bekle. "push et", "push yapabilirsin" veya eşdeğer bir onay gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz.
-5. **PR izni:** ⛔ DUR. PR oluşturmak için kullanıcıdan açık onay bekle. Onay gelmeden `gh pr create` komutu KESİNLİKLE çalıştırılmaz. İzin gelince:
+3. **Ortam kontrolü:** Port-sensitive komutlarda (`dotnet`, `npm`, `docker-compose` vb.) önce `cd <hedef_dizin>` çalıştır, sonra komutu çalıştır. Mevcut çalışma dizinine güvenme.
+4. **Commit:** Birden fazla adım varsa her adımın sonunda yapılan işlemi açıklayıcı bir mesajla commitle (Bölüm 6 formatına uygun).
+5. **Push izni:** ⛔ DUR. Bölüm tamamlandığında push yapmak için kullanıcıdan açık onay bekle. "push et", "push yapabilirsin" veya eşdeğer bir onay gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz.
+6. **PR izni:** ⛔ DUR. PR oluşturmak için kullanıcıdan açık onay bekle. Onay gelmeden `gh pr create` komutu KESİNLİKLE çalıştırılmaz. İzin gelince:
    - Türkçe, detaylı PR açıklaması yaz
    - Test plan adımlarını checkbox listesi olarak ekle
    - `--base develop` kullan
-6. **Bilgilendir:** PR erişim linkini kullanıcıya ver.
-7. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap ve açıklayıcı commit mesajıyla commitle. Ardından push yapmak için kullanıcıdan açık onay iste; "push et", "push yapabilirsin" veya eşdeğer bir onay gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz. Onay gelince push'la.
-8. **Tekrar review:** Ek review gelebilir — 7. adımı tekrarla.
-9. **Merge sonrası:** ⛔ DUR. Kullanıcıdan "merge edildi" bilgisi VE "devam et" / "sonraki bölüme geç" onayı gelmeden bir sonraki bölüme KESİNLİKLE geçilmez. Bu onay gelmeden hiçbir yeni branch açılmaz, hiçbir kod yazılmaz.
-10. **Döngü:** İzin gelince 1. adımdan tekrar başla.
+7. **Bilgilendir:** PR erişim linkini kullanıcıya ver.
+8. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap ve açıklayıcı commit mesajıyla commitle. Ardından push yapmak için kullanıcıdan açık onay iste; "push et", "push yapabilirsin" veya eşdeğer bir onay gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz. Onay gelince push'la.
+9. **Tekrar review:** Ek review gelebilir — 8. adımı tekrarla.
+10. **Merge sonrası:** ⛔ DUR. Kullanıcıdan "merge edildi" bilgisi VE "devam et" / "sonraki bölüme geç" onayı gelmeden bir sonraki bölüme KESİNLİKLE geçilmez. Bu onay gelmeden hiçbir yeni branch açılmaz, hiçbir kod yazılmaz.
+11. **Döngü:** İzin gelince 1. adımdan tekrar başla.
 
 ---
 
@@ -322,6 +324,32 @@ docs/                   → Proje dokümantasyonu
 - [Teknoloji Kararları](docs/architecture/tech-stack.md)
 - [Veritabanı Tasarımı](docs/architecture/database-design.md)
 - [API Tasarımı](docs/architecture/api-design.md)
+
+---
+
+## BÖLÜM 12: KULLANICI DEĞİŞİKLİKLERİ VE BAĞIMLILIK YÖNETİMİ
+
+> **Bu kurallar mutlak olup atlanamaz.**
+
+### Kullanıcı Değişiklikleri
+- Kullanıcının doğrudan yaptığı değişiklikler **kesinlikle silinemez, ezilemez veya geri alınamaz.**
+- `.gitignore`, config dosyaları dahil her dosyada kullanıcı değişikliği korunur.
+- Bir dosyayı düzenlemeden önce kullanıcının o dosyada değişiklik yapıp yapmadığını kontrol et.
+- git log'da beklenmedik commitler görürsen kendi yorumuna göre hareket etme — kullanıcıya sor.
+
+### Versiyon & Bağımlılık Yönetimi
+- SDK, runtime veya framework versiyonu (`.NET`, `Node.js`, `npm` vb.) **kullanıcı onayı olmadan değiştirilemez.**
+- NuGet, npm veya diğer paket yöneticilerinde major veya minor versiyon yükseltmesi kullanıcı onayı gerektirir. Patch güncellemeler için de onay alınması önerilir.
+- Versiyon yükseltmesi gerektiğinde şu formatta kullanıcıya sor:
+  > "`X` şu an `A.B.C` versiyonunda. `A.B.D` versiyonuna yükseltmek istiyorum. Onaylıyor musunuz?"
+- Onay gelmeden paket veya versiyon değişikliği yapan hiçbir komut çalıştırılmaz; buna `dotnet add package`, `npm install <paket>`, `npm update`, `dotnet tool update` ve benzeri komutlar dahildir.
+- Mevcut bağımlılık tanımına sadık kalan, yeni paket eklemeyen ve versiyon değiştirmeyen kurulum/doğrulama komutları bu yasağın dışındadır.
+
+### Port Yönetimi
+- Port-sensitive işlemlerde önce portun müsait olup olmadığını kontrol et:
+  - WSL2: `ss -tlnp | grep :<port>`
+  - Windows: `netstat -ano | findstr :<port>`
+- Mevcut port durumunu kontrol etmeden yeni port ataması yapma.
 
 ---
 

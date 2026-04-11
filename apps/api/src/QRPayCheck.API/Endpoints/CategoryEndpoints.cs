@@ -30,4 +30,12 @@ public static class CategoryEndpoints
         var result = await bus.InvokeAsync<CategoryDto>(cmd);
         return Results.Ok(result);
     }
+
+    [WolverineDelete("/api/categories/{id:guid}")]
+    [Authorize]
+    public static async Task<IResult> DeleteCategory(Guid id, IMessageBus bus)
+    {
+        await bus.InvokeAsync(new DeleteCategoryCommand(id));
+        return Results.NoContent();
+    }
 }

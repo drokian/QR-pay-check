@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using QRPayCheck.Application.Common.Interfaces;
 
 namespace QRPayCheck.Infrastructure.Services;
@@ -10,12 +9,10 @@ namespace QRPayCheck.Infrastructure.Services;
 public sealed class LocalFileStorageService : IFileStorageService
 {
     private readonly IWebHostEnvironment _env;
-    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public LocalFileStorageService(IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor)
+    public LocalFileStorageService(IWebHostEnvironment env)
     {
         _env = env;
-        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<string> SaveAsync(
@@ -29,18 +26,18 @@ public sealed class LocalFileStorageService : IFileStorageService
 
         var now = DateTime.UtcNow;
         var relativePath = Path.Combine("uploads", now.Year.ToString(), now.Month.ToString("D2"), uniqueName);
-        var absolutePath = Path.Combine(_env.WebRootPath, relativePath);
+
+        var webRootPath = !string.IsNullOrWhiteSpace(_env.WebRootPath)
+            ? _env.WebRootPath
+            : Path.Combine(_env.ContentRootPath, "wwwroot");
+
+        var absolutePath = Path.Combine(webRootPath, relativePath);
 
         Directory.CreateDirectory(Path.GetDirectoryName(absolutePath)!);
 
         await using var fileStream = File.Create(absolutePath);
         await content.CopyToAsync(fileStream, ct);
 
-        var request = _httpContextAccessor.HttpContext?.Request;
-        var baseUrl = request is not null
-            ? $"{request.Scheme}://{request.Host}"
-            : string.Empty;
-
-        return $"{baseUrl}/{relativePath.Replace(Path.DirectorySeparatorChar, '/')}";
+        return $"/{relativePath.Replace(Path.DirectorySeparatorChar, '/')}";
     }
 }

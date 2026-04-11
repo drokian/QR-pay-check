@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using QRPayCheck.Application.Tenants;
 using QRPayCheck.Application.Tenants.Commands.CreateTenant;
+using QRPayCheck.Application.Tenants.Commands.DeleteTenant;
 using QRPayCheck.Application.Tenants.Commands.UpdateTenant;
 using QRPayCheck.Application.Tenants.Queries;
 using Wolverine;
@@ -32,5 +33,13 @@ public static class TenantEndpoints
     {
         var result = await bus.InvokeAsync<TenantDto>(command);
         return Results.Ok(result);
+    }
+
+    [WolverineDelete("/api/tenants/me")]
+    [Authorize]
+    public static async Task<IResult> DeleteTenant(IMessageBus bus)
+    {
+        await bus.InvokeAsync(new DeleteTenantCommand());
+        return Results.NoContent();
     }
 }

@@ -38,4 +38,12 @@ public static class MenuEndpoints
         var result = await bus.InvokeAsync<MenuDto>(cmd);
         return Results.Ok(result);
     }
+
+    [WolverineDelete("/api/menus/{id:guid}")]
+    [Authorize]
+    public static async Task<IResult> DeleteMenu(Guid id, IMessageBus bus)
+    {
+        await bus.InvokeAsync(new DeleteMenuCommand(id));
+        return Results.NoContent();
+    }
 }

@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using QRPayCheck.Application.Common.Interfaces;
 
@@ -33,8 +34,43 @@ public sealed class CurrentUserContext : ICurrentUserContext
             ? null
             : $"{givenName} {familyName}".Trim();
 
-        Role = u.FindFirstValue(ClaimTypes.Role)
-            ?? u.FindFirstValue("realm_access")
-            ?? u.FindFirstValue("roles");
+        Role = ParseRole(u);
     }
+
+    private static string? ParseRole(ClaimsPrincipal user)
+    {
+        // 1. Standart rol claim'i (JwtBearer bazı konfigürasyonlarda map eder)
+        var standardRole = user.FindFirstValue(ClaimTypes.Role);
+        if (!string.IsNullOrWhiteSpace(standardRole))
+            return Truncate(standardRole, 50);
+
+        // 2. Keycloak realm_access claim: {"roles":["restaurant-owner"]}
+        var realmAccess = user.FindFirstValue("realm_access");
+        if (!string.IsNullOrWhiteSpace(realmAccess))
+        {
+            try
+            {
+                using var doc = JsonDocument.Parse(realmAccess);
+                if (doc.RootElement.TryGetProperty("roles", out var rolesElement))
+                {
+                    foreach (var role in rolesElement.EnumerateArray())
+                    {
+                        var roleName = role.GetString();
+                        if (!string.IsNullOrWhiteSpace(roleName))
+                            return Truncate(roleName, 50);
+                    }
+                }
+            }
+            catch (JsonException)
+            {
+                // JSON değil; ham string olarak kullan
+                return Truncate(realmAccess, 50);
+            }
+        }
+
+        return null;
+    }
+
+    private static string Truncate(string value, int maxLength)
+        => value.Length <= maxLength ? value : value[..maxLength];
 }

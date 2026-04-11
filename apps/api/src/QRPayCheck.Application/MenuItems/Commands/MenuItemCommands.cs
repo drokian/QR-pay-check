@@ -110,3 +110,23 @@ public static class UpdateMenuItemHandler
         return item.Adapt<MenuItemDto>();
     }
 }
+
+public sealed record UploadMenuItemImageCommand(Guid Id, string ImageUrl);
+
+public static class UploadMenuItemImageHandler
+{
+    public static async Task<MenuItemDto> Handle(
+        UploadMenuItemImageCommand command,
+        IApplicationDbContext db,
+        CancellationToken ct)
+    {
+        var item = await db.MenuItems.FirstOrDefaultAsync(m => m.Id == command.Id, ct)
+            ?? throw new KeyNotFoundException($"Ürün bulunamadı: {command.Id}");
+
+        item.ImageUrl = command.ImageUrl;
+        item.UpdatedAt = DateTime.UtcNow;
+
+        await db.SaveChangesAsync(ct);
+        return item.Adapt<MenuItemDto>();
+    }
+}

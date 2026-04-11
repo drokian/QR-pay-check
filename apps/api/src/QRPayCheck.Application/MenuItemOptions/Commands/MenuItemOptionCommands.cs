@@ -39,6 +39,16 @@ public sealed class CreateMenuItemOptionCommandValidator : AbstractValidator<Cre
     }
 }
 
+public sealed class UpdateMenuItemOptionCommandValidator : AbstractValidator<UpdateMenuItemOptionCommand>
+{
+    public UpdateMenuItemOptionCommandValidator()
+    {
+        RuleFor(x => x.GroupName).NotEmpty().MaximumLength(100);
+        RuleFor(x => x.Name).NotEmpty().MaximumLength(200);
+        RuleFor(x => x.MaxSelections).GreaterThan(0);
+    }
+}
+
 public static class CreateMenuItemOptionHandler
 {
     public static async Task<MenuItemOptionDto> Handle(
@@ -85,6 +95,7 @@ public static class UpdateMenuItemOptionHandler
         option.IsRequired = command.IsRequired;
         option.MaxSelections = command.MaxSelections;
         option.SortOrder = command.SortOrder;
+        option.UpdatedAt = DateTime.UtcNow;
 
         await db.SaveChangesAsync(ct);
         return option.Adapt<MenuItemOptionDto>();

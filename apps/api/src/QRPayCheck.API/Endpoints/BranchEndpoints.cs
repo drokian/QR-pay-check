@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using QRPayCheck.Application.Branches;
 using QRPayCheck.Application.Branches.Commands.CreateBranch;
+using QRPayCheck.Application.Branches.Commands.DeleteBranch;
 using QRPayCheck.Application.Branches.Commands.UpdateBranch;
 using QRPayCheck.Application.Branches.Queries;
 using Wolverine;
@@ -38,5 +39,13 @@ public static class BranchEndpoints
         var cmd = command with { Id = id };
         var result = await bus.InvokeAsync<BranchDto>(cmd);
         return Results.Ok(result);
+    }
+
+    [WolverineDelete("/api/branches/{id:guid}")]
+    [Authorize]
+    public static async Task<IResult> DeleteBranch(Guid id, IMessageBus bus)
+    {
+        await bus.InvokeAsync(new DeleteBranchCommand(id));
+        return Results.NoContent();
     }
 }

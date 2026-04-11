@@ -60,18 +60,21 @@ Bu işlem geri alınamaz olabilir. Devam etmemi onaylıyor musunuz?
 
 ## ZORUNLU ÇALIŞMA PLANI
 
-Her geliştirme bölümünde bu adımları sırayla uygula, atlama:
+> **Bu adımlar her işlem bölümünde sırasıyla uygulanır. Atlanamaz.**
 
-1. `git checkout develop && git pull origin develop`
-2. `develop`'dan uygun isimle yeni branch aç (bkz. Dal İsimlendirme)
-3. Her adım sonunda Conventional Commits formatıyla commitle
-4. Bölüm bitince **push için kullanıcıdan izin iste**, izin gelince push'la
-5. **PR için kullanıcıdan izin iste**, izin gelince: Türkçe detaylı açıklama + test checklist + `--base develop` ile PR oluştur
-6. PR linkini kullanıcıya ver
-7. Review gelince gerekli düzeltmeleri yap, commitle; **push için kullanıcıdan izin iste**, izin gelince push'la
-8. Ek review gelebilir — 7. adımı tekrarla
-9. "Merge edildi" bilgisi gelince sonraki bölüme geçmek için izin iste
-10. İzin gelince 1. adımdan başla
+1. **Başlangıç:** `develop` branch'ını `origin/develop` ile hizala (`git checkout develop && git pull origin develop`).
+2. **Branch oluştur:** `develop`'dan, Bölüm 9'daki branch stratejisine uygun isimle yeni branch aç.
+3. **Commit:** Birden fazla adım varsa her adımın sonunda yapılan işlemi açıklayıcı bir mesajla commitle (Bölüm 6 formatına uygun).
+4. **Push izni:** ⛔ DUR. Bölüm tamamlandığında push yapmak için kullanıcıdan açık onay bekle. "push et", "push yapabilirsin" veya eşdeğer bir onay gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz.
+5. **PR izni:** ⛔ DUR. PR oluşturmak için kullanıcıdan açık onay bekle. Onay gelmeden `gh pr create` komutu KESİNLİKLE çalıştırılmaz. İzin gelince:
+   - Türkçe, detaylı PR açıklaması yaz
+   - Test plan adımlarını checkbox listesi olarak ekle
+   - `--base develop` kullan
+6. **Bilgilendir:** PR erişim linkini kullanıcıya ver.
+7. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap, açıklayıcı commit mesajıyla commitle; ardından push için kullanıcıdan açık onay iste. 4. adımdaki kuralla aynı şekilde, açık izin gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz.
+8. **Tekrar review:** Ek review gelebilir — 7. adımı tekrarla.
+9. **Merge sonrası:** ⛔ DUR. Kullanıcıdan "merge edildi" bilgisi VE "devam et" / "sonraki bölüme geç" onayı gelmeden bir sonraki bölüme KESİNLİKLE geçilmez. Bu onay gelmeden hiçbir yeni branch açılmaz, hiçbir kod yazılmaz.
+10. **Döngü:** İzin gelince 1. adımdan tekrar başla.
 
 ---
 

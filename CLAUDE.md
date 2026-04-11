@@ -246,15 +246,15 @@ Tüm merge'ler Pull Request üzerinden yapılır.
 1. **Başlangıç:** `develop` branch'ını `origin/develop` ile hizala (`git checkout develop && git pull origin develop`).
 2. **Branch oluştur:** `develop`'dan, Bölüm 9'daki branch stratejisine uygun isimle yeni branch aç.
 3. **Commit:** Birden fazla adım varsa her adımın sonunda yapılan işlemi açıklayıcı bir mesajla commitle (Bölüm 6 formatına uygun).
-4. **Push izni:** Bölüm bittiğinde push yapmak için kullanıcıdan izin iste. İzin gelince push'la.
-5. **PR izni:** PR oluşturmak için kullanıcıdan izin iste. İzin gelince:
+4. **Push izni:** ⛔ DUR. Bölüm tamamlandığında push yapmak için kullanıcıdan açık onay bekle. "push et", "push yapabilirsin" veya eşdeğer bir onay gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz.
+5. **PR izni:** ⛔ DUR. PR oluşturmak için kullanıcıdan açık onay bekle. Onay gelmeden `gh pr create` komutu KESİNLİKLE çalıştırılmaz. İzin gelince:
    - Türkçe, detaylı PR açıklaması yaz
    - Test plan adımlarını checkbox listesi olarak ekle
    - `--base develop` kullan
 6. **Bilgilendir:** PR erişim linkini kullanıcıya ver.
-7. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap, açıklayıcı commit mesajıyla commitle; **push için kullanıcıdan izin iste**, izin gelince push'la.
+7. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap ve açıklayıcı commit mesajıyla commitle. Ardından push yapmak için kullanıcıdan açık onay iste; "push et", "push yapabilirsin" veya eşdeğer bir onay gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz. Onay gelince push'la.
 8. **Tekrar review:** Ek review gelebilir — 7. adımı tekrarla.
-9. **Merge sonrası:** Kullanıcıdan "merge edildi" bilgisi geldiğinde, sonraki bölüme geçmek için izin iste.
+9. **Merge sonrası:** ⛔ DUR. Kullanıcıdan "merge edildi" bilgisi VE "devam et" / "sonraki bölüme geç" onayı gelmeden bir sonraki bölüme KESİNLİKLE geçilmez. Bu onay gelmeden hiçbir yeni branch açılmaz, hiçbir kod yazılmaz.
 10. **Döngü:** İzin gelince 1. adımdan tekrar başla.
 
 ---

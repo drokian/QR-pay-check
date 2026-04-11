@@ -153,15 +153,24 @@ Aşağıdaki işlemler önceden onaylanmıştır ve onay gerektirmez:
 ## BÖLÜM 4: SPRINT KAPSAMI
 
 ```
-# ⬇️ Bu bölümü her sprint başında Sonnet çıktısından doldur
-
-ACTIVE_SPRINT: — (henüz tanımlanmadı)
-ACTIVE_BRANCH: feature/<kapsam>-<kısa-açıklama>
+ACTIVE_SPRINT: S1 — Altyapı Kurulumu
+ACTIVE_BRANCH: feature/infra-setup
 ALLOWED_FILES:
-  - (Her sprint başında Sonnet çıktısından doldurulacak)
+  - turbo.json
+  - package.json
+  - .gitignore
+  - infrastructure/docker/**
+  - apps/api/**
+  - apps/customer-web/**
+  - apps/restaurant-web/**
+  - packages/ui/**
+  - packages/api-client/**
+  - packages/shared-types/**
 
 FORBIDDEN_FILES:
-  - (Her sprint başında belirlenecek)
+  - apps/customer-mobile/**
+  - apps/restaurant-mobile/**
+  - apps/admin-web/**
 ```
 
 ---

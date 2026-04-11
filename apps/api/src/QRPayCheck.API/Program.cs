@@ -16,12 +16,33 @@ builder.Host.UseSerilog((ctx, lc) => lc
 // OpenAPI
 builder.Services.AddOpenApi();
 
-// Authentication (Keycloak JWT)
+// Authentication (Keycloak JWT) — fail-fast doğrulama
+var keycloakAuthority = builder.Configuration["Keycloak:Authority"];
+var keycloakAudience = builder.Configuration["Keycloak:Audience"];
+
+if (string.IsNullOrWhiteSpace(keycloakAuthority) ||
+    keycloakAuthority.Contains("__SET_IN", StringComparison.OrdinalIgnoreCase) ||
+    keycloakAuthority.Contains("placeholder", StringComparison.OrdinalIgnoreCase))
+{
+    throw new InvalidOperationException(
+        "Keycloak JWT yapılandırması geçersiz: 'Keycloak:Authority' değeri boş veya placeholder. " +
+        "Lütfen geçerli bir Authority değeri sağlayın (örn. environment variable veya user-secrets üzerinden).");
+}
+
+if (string.IsNullOrWhiteSpace(keycloakAudience) ||
+    keycloakAudience.Contains("__SET_IN", StringComparison.OrdinalIgnoreCase) ||
+    keycloakAudience.Contains("placeholder", StringComparison.OrdinalIgnoreCase))
+{
+    throw new InvalidOperationException(
+        "Keycloak JWT yapılandırması geçersiz: 'Keycloak:Audience' değeri boş veya placeholder. " +
+        "Lütfen geçerli bir Audience değeri sağlayın (örn. environment variable veya user-secrets üzerinden).");
+}
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = builder.Configuration["Keycloak:Authority"];
-        options.Audience = builder.Configuration["Keycloak:Audience"];
+        options.Authority = keycloakAuthority;
+        options.Audience = keycloakAudience;
         options.RequireHttpsMetadata = !builder.Environment.IsDevelopment();
     });
 

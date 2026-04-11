@@ -83,7 +83,7 @@ Bu işlem geri alınamaz olabilir. Devam etmemi onaylıyor musunuz?
    - Test plan adımlarını checkbox listesi olarak ekle
    - `--base develop` kullan
 7. **Bilgilendir:** PR erişim linkini kullanıcıya ver.
-8. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap, açıklayıcı commit mesajıyla commitle; ardından push için kullanıcıdan açık onay iste. 4. adımdaki kuralla aynı şekilde, açık izin gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz.
+8. **Review düzeltmeleri:** Review sonucunda gerekli düzeltmeleri yap, açıklayıcı commit mesajıyla commitle; ardından push için kullanıcıdan açık onay iste. 5. adımdaki kuralla aynı şekilde, açık izin gelmeden `git push` komutu KESİNLİKLE çalıştırılmaz.
 9. **Tekrar review:** Ek review gelebilir — 8. adımı tekrarla.
 10. **Merge sonrası:** ⛔ DUR. Kullanıcıdan "merge edildi" bilgisi VE "devam et" / "sonraki bölüme geç" onayı gelmeden bir sonraki bölüme KESİNLİKLE geçilmez. Bu onay gelmeden hiçbir yeni branch açılmaz, hiçbir kod yazılmaz.
 11. **Döngü:** İzin gelince 1. adımdan tekrar başla.
